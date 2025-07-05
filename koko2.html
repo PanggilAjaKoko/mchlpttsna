@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>profile web</title>
+    <link rel="icon" type="image/jpg" href="icon.jpg" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+     <link rel="stylesheet" href="./style2.css" />
+</head>
+<body>
+    <header>
+
+        <audio id="backgroundMusic" loop>
+    <source src="pante.mp3" type="audio/mpeg">
+    Browser Anda tidak mendukung elemen audio.
+  </audio>
+
+        <nav>
+            <a href="#home" class="logo">Nyong Pattiasina</a>
+            <ul class="nav-links">
+                <li><a href="#home">Home</a></li>
+                <li><a href="#about">About</a></li>
+                <li><a href="#skills">Skills</a></li>
+                <li><a href="#Galeri">Galeri</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <section id="home">
+        <h1>Hi, I'm Michael Pattiasina</h1>
+        <p>This is My Portofolio Website and simple portofolio but cool</p>
+        <div class="home-img">
+            <img src="tes2.jpg">
+        </div>
+    </section>
+
+    <section id="about">
+       <h2>About Me</h2>
+        <div class="about-container">
+            <div class="about-img">
+                <img src="koko.jpg" alt="Profile">
+            </div>
+            <div class="about-text">
+                <P>Saya adalah seorang pelajar di Universitas Kristen  Indonesia Maluku </P>
+                <p>Saya Lahir di Kalimantan Barat Tetapi Darah Maluku Yang Mengalir Memanggil Saya Untuk Kembali </p>
+                <p>Dan saya datang dari sebuah pulau anyo-anyo yaitu Nusalaut</p>
+                <p>Saya bersemangat menciptakan pengalaman digital yang indah. Dengan pengalaman yang saya dapatkan di kampus, saya memadukan kreativitas dengan keterampilan teknik.</p>
+                <p>Saya berharap dari pembelajaran pemrograman web ini, saya dapat menjadi seorang yang dapat memanfaatkan digital dengan baik.</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="skill" id="skills">
+        <h2>My Skill</h2>
+    <h3 class="h3 skills-title"></h3> <div class="skills-container">
+        <div class="skill-box">
+            <div class="skill-name">HTML</div>
+            <div class="skill-bar-container">
+                <div class="skill-bar" data-progress="80"></div>
+            </div>
+            <div class="skill-percentage">65%</div>
+        </div>
+
+        <div class="skill-box">
+            <div class="skill-name">JAVASCRIPT</div>
+            <div class="skill-bar-container">
+                <div class="skill-bar" data-progress="70"></div>
+            </div>
+            <div class="skill-percentage">60%</div>
+        </div>
+
+        <div class="skill-box">
+            <div class="skill-name">PYTHON</div>
+            <div class="skill-bar-container">
+                <div class="skill-bar" data-progress="90"></div>
+            </div>
+            <div class="skill-percentage">55%</div>
+        </div>
+
+        <div class="skill-box">
+            <div class="skill-name">CSS</div>
+            <div class="skill-bar-container">
+                <div class="skill-bar" data-progress="50"></div>
+            </div>
+            <div class="skill-percentage">70%</div>
+        </div>
+    </div>
+</section>
+<section id="Galeri">
+    <h2>Galeri</h2>
+    <div class="gallery-container">
+        <img src="papamama.jpg" alt="Gambar 1" class="gallery-item">
+        <img src="papimami2.jpg" alt="Gambar 2" class="gallery-item">
+        <img src="anaanagas2.jpg" alt="Gambar 3" class="gallery-item">
+        <img src="wacana1.jpg" alt="Gambar 4" class="gallery-item">
+        <img src="volly1.jpg" alt="Gambar 5" class="gallery-item">
+        <img src="volly2.jpg" alt="Gambar 6" class="gallery-item">
+    </div>
+
+    <div id="imageModal" class="modal">
+        <span class="close">&times;</span>
+        <img class="modal-content" id="img01">
+        <div id="caption"></div>
+    </div>
+</section>
+        <section id="contact">
+            <h2>Contact Me</h2>
+    <div style="text-align: center; margin-top: 2rem;">
+        <div class="social-icons">
+            <a href="https://wa.me/+6281254658756" target="_blank" class="icon whatsapp">
+                <i class="fab fa-whatsapp"></i>
+            </a>
+            <a href="mailto:kokopattiasina73@gmail.com" target="_blank" class="icon gmail">
+                <i class="far fa-envelope"></i>
+            </a>
+            <a href="https://www.instagram.com/_mchlpttsna" target="_blank" class="icon instagram">
+                <i class="fab fa-instagram"></i>
+            </a>
+            <a href="https://www.tiktok.com/_mchlpttsna" target="_blank" class="icon tiktok">
+                <i class="fa-brands fa-tiktok"></i>
+            </a>
+        </div>
+    </div>
+</section>
+    <footer>
+        <p>Terima Kasih</p>
+        <p>#KingKoko</p>
+    </footer>
+
+    <script>
+        // Dapatkan elemen audio
+    const backgroundMusic = document.getElementById('backgroundMusic');
+
+    // Tambahkan event listener ke seluruh dokumen (body)
+    // yang akan mendengarkan setiap klik di mana saja
+    document.body.addEventListener('click', function() {
+      // Periksa apakah musik belum diputar
+      // `paused` akan true jika musik belum diputar atau sedang dijeda
+      if (backgroundMusic.paused) {
+        // Coba putar musik
+        const playPromise = backgroundMusic.play();
+
+        // Tangani kasus di mana pemutaran gagal (misalnya, diblokir oleh browser)
+        if (playPromise !== undefined) {
+          playPromise.then(() => {
+            console.log('Musik berhasil diputar setelah klik.');
+          }).catch(error => {
+            console.log('Gagal memutar musik setelah klik:', error);
+            // Anda bisa memberi tahu pengguna di sini jika pemutaran gagal
+          });
+        }
+      }
+    });
+
+    // Peringatan: Pastikan 'nama_file_audio_anda.mp3' adalah jalur yang benar ke file audio Anda.
+
+    // Peringatan: Pastikan 'nama_file_audio_anda.mp3' adalah jalur yang benar ke file audio Anda.
+        // Smooth scrolling
+        document.querySelectorAll('a').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                const href = this.getAttribute('href');
+                if (href.startsWith('#')) {
+                    e.preventDefault();
+                    document.querySelector(href).scrollIntoView({
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+
+        // Intersection Observer for section animations
+        const sections = document.querySelectorAll('section, footer');
+        const observerOptions = { root: null, rootMargin: '0px', threshold: 0.2 };
+        const sectionObserver = new IntersectionObserver((entries, observer) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('in-view');
+                }
+            });
+        }, observerOptions);
+        sections.forEach(section => { sectionObserver.observe(section); });
+
+        // Staggered animation for skill cards
+        const skillCards = document.querySelectorAll('.skill-card');
+        skillCards.forEach((card, index) => {
+            card.style.animationDelay = `${index * 0.1}s`;
+        });
+        document.addEventListener("DOMContentLoaded", function() {
+        const skillBars = document.querySelectorAll(".skill-bar");
+
+        skillBars.forEach(bar => {
+            const progress = bar.dataset.progress; // Ambil nilai dari data-progress
+            // Gunakan setTimeout untuk menunda sedikit agar transisi terlihat jelas
+            setTimeout(() => {
+                bar.style.width = progress + "%"; // Setel lebar bar
+            }, 100); // Penundaan 100ms
+        });
+    });
+
+        // Fungsionalitas Kursor Partikel - DIHAPUS SEPENUHNYA
+        /*
+        const cursorMain = document.querySelector('.cursor-main');
+        const particles = [];
+        const maxParticles = 30;
+        const particleLifetime = 800;
+        let mouseX = 0;
+        let mouseY = 0;
+        let isHoveringInteractive = false;
+
+        function createParticle() { ... }
+
+        document.addEventListener('mousemove', e => { ... });
+
+        const interactiveElements = document.querySelectorAll('a, button, input, textarea');
+        interactiveElements.forEach(el => { ... });
+        */
+
+        // script.js
+
+// Contoh sederhana: tidak diperlukan untuk efek di foto, karena CSS lebih baik
+// untuk efek hover sederhana. Namun ini adalah template jika Anda perlu JS.
+
+document.addEventListener('DOMContentLoaded', () => {
+    const icons = document.querySelectorAll('.icon');
+
+    icons.forEach(icon => {
+        // Efek hover sederhana sudah ditangani oleh CSS transition dan :hover
+        // Jika Anda ingin efek JS yang lebih kompleks, bisa ditambahkan di sini.
+        // Contoh:
+         icon.addEventListener('click', () => {
+             console.log('Ikon diklik!');
+         });
+    });
+});
+    </script>
+</body>
+</html>

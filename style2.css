@@ -1,0 +1,655 @@
+:root {
+            --pink: #26e1eb;
+            --black: #000;
+            --white: #ffffff;
+            /* --particle-color: #ff69b4; */ /* Ini bisa dihapus juga jika tidak ada partikel */
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', sans-serif;
+            /* cursor: none; */ /* Hapus baris ini untuk menampilkan kursor default */
+        }
+
+        body {
+            background: var(--white);
+            color: var(--black);
+            line-height: 1.6;
+            overflow-x: hidden;
+            cursor: default; /* Pastikan kursor default terlihat */
+        }
+
+        header {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: var(--white);
+            padding: 1rem;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            z-index: 1000;
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            max-width: 1000px;
+            margin: 0 auto;
+            align-items: center;
+        }
+
+        .logo {
+            color: var(--pink);
+            font-weight: bold;
+            font-size: 1.5rem;
+            text-decoration: none;
+            animation: fadeInDown 1s ease-out;
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+        }
+
+        .nav-links a {
+            margin-left: 1.5rem;
+            color: var(--black);
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s ease, transform 0.3s ease;
+        }
+
+        .nav-links a:hover {
+            color: var(--pink);
+            transform: translateY(-3px);
+        }
+
+        section {
+            min-height: 100vh;
+            padding: 6rem 1rem;
+            text-align: center;
+            position: relative;
+        }
+
+        /* Status awal untuk elemen yang akan dianimasikan masuk */
+        section h1, section h2, section p, section .btn,
+        .about-img, .about-text h3, .about-text p,
+        .skill-card, section form input, section form textarea, section form button {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+        }
+
+        /* Animasi saat section terlihat */
+        section.in-view h1, section.in-view h2, section.in-view p, section.in-view .btn {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Animasi spesifik untuk bagian Home */
+        #home.in-view h1 { animation: slideInLeft 1s ease-out forwards; }
+        #home.in-view p { animation: fadeIn 1.5s ease-out forwards; }
+        #home.in-view .btn { animation: bounceIn 1s ease-out forwards; }
+
+        /* Animasi spesifik untuk bagian About */
+        #about.in-view h2 { animation: fadeIn 1.2s ease-out forwards; }
+        #about.in-view .about-container { animation: float 3s ease-in-out infinite; }
+        #about.in-view .about-img { animation: zoomIn 1s ease-out forwards; }
+        #about.in-view .about-text h3 { animation: slideInRight 1s ease-out forwards; animation-delay: 0.2s; }
+        #about.in-view .about-text p:first-of-type { animation: slideInRight 1s ease-out forwards; animation-delay: 0.4s; }
+        #about.in-view .about-text p:last-of-type { animation: slideInRight 1s ease-out forwards; animation-delay: 0.6s; }
+
+        /* Styling Umum untuk Section Skill (opsional, sesuaikan dengan layout Anda) */
+.skill {
+    padding: 60px 0;
+     background: linear-gradient(to right, var(--white), var(--pink)); /* Contoh latar belakang section */
+    text-align: center; /* Untuk memusatkan h3 */
+}
+
+.h3.skills-title {
+    font-size: 2em;
+    color: var(--black);
+    margin-bottom: 40px;
+}
+
+/* Styling untuk Container Daftar Skill */
+.skills-list {
+    list-style: none; /* Menghilangkan bullet point dari list */
+    padding: 0;
+    margin: 0 auto; /* Memusatkan list */
+    max-width: 700px; /* Batasi lebar maksimum daftar skill */
+    display: grid; /* Menggunakan grid untuk tata letak yang responsif */
+    gap: 20px; /* Jarak antar item skill */
+    background-color: var(--white); /* Latar belakang untuk 'content-card' */
+    border-radius: 10px; /* Sudut membulat untuk 'content-card' */
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); /* Bayangan untuk 'content-card' */
+    padding: 30px;
+}
+
+/* Styling untuk Setiap Item Skill */
+.skills-item {
+    margin-bottom: 20px;
+}
+
+.skills-item:last-child {
+    margin-bottom: 0; /* Hapus margin bawah pada item terakhir */
+}
+
+/* Styling untuk Wrapper Judul dan Persentase */
+.title-wrapper {
+    display: flex;
+    justify-content: space-between; /* Menempatkan judul dan persentase di ujung-ujung */
+    align-items: center;
+    margin-bottom: 8px; /* Jarak antara judul/persen dan progress bar */
+}
+
+.title-wrapper .h5 {
+    font-size: 1.1em;
+    font-weight: 600;
+    color: var(--text-color);
+    margin: 0; /* Hapus margin default h5 */
+}
+
+.title-wrapper data {
+    font-size: 1em;
+    font-weight: 500;
+    color: var(--text-color);
+}
+
+/* Styling untuk Latar Belakang Progress Bar */
+.skill-progress-bg {
+    width: 100%;
+    height: 10px; /* Tinggi progress bar */
+    background-color: var(--progress-bg); /* Warna abu-abu latar belakang bar */
+    border-radius: 5px; /* Sudut membulat */
+    overflow: hidden; /* Penting untuk menjaga fill tetap di dalam */
+}
+
+/* Styling untuk Isi (Fill) Progress Bar */
+.skill-progress-fill {
+    height: 100%;
+    background-color: var(--progress-fill); /* Warna pink untuk isi bar */
+    border-radius: 5px; /* Sudut membulat */
+    transition: width 0.5s ease-in-out; /* Animasi saat lebar berubah */
+    /* Lebar diatur langsung di HTML via inline style (misal style="width: 80%") */
+}
+
+/* Responsif (Opsional, tapi disarankan) */
+@media (min-width: 768px) {
+    .skills-list {
+        grid-template-columns: repeat(2, 1fr); /* 2 kolom di layar yang lebih besar */
+    }
+}
+
+@media (min-width: 1024px) {
+    .skills-list {
+        grid-template-columns: repeat(2, 1fr); /* Tetap 2 kolom untuk contoh ini */
+        gap: 30px;
+    }
+}
+        #home {
+    background-image:
+        linear-gradient(to right, rgba(255, 254, 254, 0.8), rgba(38, 225, 235, 0.8)), /* Contoh overlay transparan dari white ke pink */
+        url('laut.jpg'); /* Pastikan jalur 'laut.jpg' benar relatif terhadap file CSS Anda */
+
+    /* --- PROPERTI PENTING UNTUK LATAR BELAKANG SATU BAGIAN --- */
+    background-size: cover;        /* Memastikan gambar menutupi seluruh area tanpa diulang */
+    background-position: center;   /* Memusatkan gambar */
+    background-repeat: no-repeat;  /* Mencegah gambar berulang */
+    /* -------------------------------------------------------- */
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center; /* Ini memusatkan konten secara vertikal dalam kolom */
+    align-items: flex-start; /* INI YANG MEMBUAT TEKS KE KIRI */
+    text-align: left; /* Tambahan untuk memastikan teks di dalamnya rata kiri */
+    padding-left: 20px; /* Tambahkan sedikit padding agar tidak terlalu mepet ke kiri */
+    min-height: 100vh; /* Memastikan section mengambil tinggi penuh viewport */
+}
+
+.home-img {
+    flex-shrink: 0; /* Mencegah gambar menyusut jika ruang terbatas */
+    margin-left: auto; /* Penting! Mendorong gambar ke kanan sejauh mungkin */
+    position: relative; /* Diperlukan untuk efek hover transform */
+}
+
+.home-img img {
+    width: 250px; /* Ukuran lebar gambar */
+    height: 250px; /* Ukuran tinggi gambar */
+    object-fit: cover; /* Memastikan gambar mengisi lingkaran tanpa distorsi */
+    border-radius: 50%; /* Membuat gambar menjadi lingkaran */
+    border: 5px solid var(--white); /* Border putih di sekeliling lingkaran */
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.2); /* Sedikit bayangan untuk efek kedalaman */
+    transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out; /* Efek transisi hover */
+}
+
+.home-img img:hover {
+    transform: scale(1.05) translateY(-5px); /* Membesar sedikit dan terangkat */
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3); /* Bayangan lebih jelas saat hover */
+}
+
+/* Jika Anda ingin efek "timbul warna" saat hover, Anda bisa memodifikasi border atau menambahkan pseudo-element */
+/* Contoh efek timbul warna dengan box-shadow */
+/*
+.home-img img:hover {
+    transform: scale(1.05) translateY(-5px);
+    box-shadow: 0 0 0 8px rgba(255, 99, 71, 0.5), 0 8px 20px rgba(0, 0, 0, 0.3);
+    /* Tambahkan box-shadow kedua dengan warna dan ukuran yang berbeda untuk efek "timbul warna" */
+
+        .btn {
+            display: inline-block;
+            padding: 0.8rem 1.8rem;
+            background: var(--pink);
+            color: var(--white);
+            border-radius: 50px;
+            text-decoration: none;
+            margin: 0.5rem;
+            transition: transform 0.3s ease, background 0.3s ease;
+        }
+
+        .btn:hover {
+            transform: translateY(-5px) scale(1.05);
+            background: #130ab1;
+        }
+
+        .about-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 2rem;
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        .about-img {
+            flex: 1;
+            min-width: 300px;
+        }
+
+        .about-img img {
+            width: 50%;
+            border-radius: 10px;
+            box-shadow: 10px 10px 0 var(--pink);
+            transition: transform 0.5s ease;
+        }
+
+        .about-img img:hover {
+            transform: rotate(5deg) scale(1.02);
+        }
+
+        .about-text {
+            flex: 1;
+            min-width: 300px;
+            text-align: left;
+        }
+
+        .skills-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1.5rem;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        footer {
+            background: var(--black);
+            color: var(--white);
+            padding: 2rem;
+            text-align: center;
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+        }
+
+        footer.in-view {
+            opacity: 1;
+            transform: translateY(0);
+            animation: fadeIn 2s ease-out forwards;
+        }
+
+        /* --- Keyframe Animations --- */
+        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+        @keyframes fadeInDown { from { opacity: 0; transform: translateY(-20px); } to { opacity: 1; transform: translateY(0); } }
+        @keyframes slideInLeft { from { opacity: 0; transform: translateX(-50px); } to { opacity: 1; transform: translateX(0); } }
+        @keyframes slideInRight { from { opacity: 0; transform: translateX(50px); } to { opacity: 1; transform: translateX(0); } }
+        @keyframes zoomIn { from { opacity: 0; transform: scale(0.8); } to { opacity: 1; transform: scale(1); } }
+        @keyframes bounceIn { 0% { opacity: 0; transform: scale(0.3); } 50% { opacity: 0.9; transform: scale(1.1); } 80% { opacity: 1; transform: scale(0.9); } 100% { opacity: 1; transform: scale(1); } }
+        @keyframes fadeInUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+        @keyframes float { 0% { transform: translateY(0px); } 50% { transform: translateY(-10px); } 100% { transform: translateY(0px); } }
+
+        /* Gaya Kursor Partikel - DIHAPUS */
+        /*
+        .cursor-main { ... }
+        .cursor-particle { ... }
+        a:hover ~ .cursor-main,
+        button:hover ~ .cursor-main,
+        input:hover ~ .cursor-main,
+        textarea:hover ~ .cursor-main { ... }
+        @media (max-width: 768px) { ... }
+        */
+       
+    .gallery-container {
+        display: flex; /* Mengatur tampilan item secara horizontal */
+        flex-wrap: wrap; /* Memungkinkan item untuk pindah baris jika tidak cukup ruang */
+        justify-content: center; /* Pusatkan item secara horizontal */
+        gap: 15px; /* Memberikan jarak antar gambar */
+        padding: 20px; /* Padding di sekitar galeri */
+    }
+
+    .gallery-item {
+        width: 100%; /* Default 100% untuk layar kecil */
+        max-width: 300px; /* Lebar maksimum untuk gambar */
+        height: auto; /* Tinggi otomatis agar proporsional */
+        border-radius: 8px; /* Sudut membulat */
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Efek bayangan */
+        cursor: pointer; /* Mengubah kursor menjadi pointer saat diarahkan */
+        transition: transform 0.2s ease-in-out; /* Animasi saat hover */
+    }
+
+    .gallery-item:hover {
+        transform: scale(1.03); /* Membesar sedikit saat di-hover */
+    }
+
+    /* Media Queries untuk Responsif */
+    @media (min-width: 600px) {
+        .gallery-item {
+            width: calc(50% - 20px); /* 2 gambar per baris di layar sedang */
+        }
+    }
+
+    @media (min-width: 900px) {
+        .gallery-item {
+            width: calc(33.33% - 20px); /* 3 gambar per baris di layar besar */
+        }
+    }
+
+    /* Gaya Modal (Pop-up) */
+    .modal {
+        display: none; /* Tersembunyi secara default */
+        position: fixed; /* Tetap di posisi yang sama saat digulir */
+        z-index: 1000; /* Posisikan di atas konten lain */
+        left: 0;
+        top: 0;
+        width: 100%; /* Lebar penuh */
+        height: 100%; /* Tinggi penuh */
+        overflow: auto; /* Memungkinkan pengguliran jika konten terlalu besar */
+        background-color: rgba(0, 0, 0, 0.9); /* Latar belakang hitam transparan */
+        justify-content: center; /* Pusatkan konten secara horizontal */
+        align-items: center; /* Pusatkan konten secara vertikal */
+    }
+
+    .modal-content {
+        margin: auto;
+        display: block;
+        width: 80%;
+        max-width: 700px;
+        animation-name: zoom;
+        animation-duration: 0.6s;
+    }
+
+    #caption {
+        margin: auto;
+        display: block;
+        width: 80%;
+        max-width: 700px;
+        text-align: center;
+        color: #ccc;
+        padding: 10px 0;
+        height: 150px;
+    }
+
+    /* Animasi Zoom pada Modal */
+    @keyframes zoom {
+        from {transform: scale(0.1)}
+        to {transform: scale(1)}
+    }
+
+    /* Tombol Tutup */
+    .close {
+        position: absolute;
+        top: 15px;
+        right: 35px;
+        color: #f1f1f1;
+        font-size: 40px;
+        font-weight: bold;
+        transition: 0.3s;
+        cursor: pointer;
+    }
+
+    .close:hover,
+    .close:focus {
+        color: #bbb;
+        text-decoration: none;
+        cursor: pointer;
+    }
+        
+        
+        .social-icons {
+    display: flex; /* Mengatur ikon agar berada dalam satu baris */
+     background-color: #26e1eb; /* Contoh latar belakang section */
+    justify-content: center; /* Membuat ikon berada di tengah horizontal */
+    align-items: center; /* Membuat ikon berada di tengah vertikal (jika diperlukan) */
+    gap: 20px; /* Jarak antar ikon */
+}
+
+.icon {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 50px; /* Ukuran lingkaran ikon */
+    height: 50px; /* Ukuran lingkaran ikon */
+    border-radius: 50%; /* Membuat bentuk lingkaran */
+    background-color: #f0f0f0; /* Warna latar belakang lingkaran (abu-abu muda) */
+    color: #888; /* Warna ikon (abu-abu sedang) */
+    font-size: 24px; /* Ukuran ikon */
+    text-decoration: none; /* Menghilangkan garis bawah pada tautan */
+    transition: background-color 0.3s ease, color 0.3s ease, transform 0.3s ease; /* Efek transisi hover */
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1); /* Sedikit bayangan untuk efek kedalaman */
+}
+
+.icon:hover {
+    background-color: #e0e0e0; /* Warna latar belakang saat dihover */
+    color: #555; /* Warna ikon saat dihover */
+    transform: translateY(-3px); /* Efek sedikit terangkat saat dihover */
+}
+
+/* Opsional: Styling spesifik untuk setiap ikon berdasarkan warna merek */
+
+.whatsapp.icon:hover {
+    background-color: #0cf804;
+    color: white;
+}
+
+.instagram.icon:hover {
+    background-color: #E4405F;
+    color: white;
+}
+
+.tiktok.icon:hover {
+    background-color: #000;
+    color: white;
+}
+
+.gmail.icon:hover {
+    background-color: #333;
+    color: white;
+}
+/* General Styling for Body (Optional, adjust as per your main style2.css) */
+body {
+    font-family: 'Arial', sans-serif; /* Pastikan font sesuai dengan desain Anda */
+    /* background: linear-gradient(to right, #e0f2f7, #c1e7f3); Ini bisa mengganggu background utama Anda */
+    /* display: flex; justify-content: center; align-items: center; min-height: 100vh; */
+    /* Hapus atau sesuaikan properti ini jika body Anda sudah diatur secara global */
+}
+
+/* Skills Section Styling */
+#skills {
+    padding: 60px 20px; /* Sesuaikan padding dengan section lain */
+    background-color: #f9f9f9; /* Warna latar belakang untuk section skills */
+    text-align: center; /* Pusatkan judul skills */
+}
+
+.skills-title {
+    font-size: 2.5em; /* Ukuran judul skills */
+    margin-bottom: 40px;
+    color: #333;
+}
+
+.skills-container {
+    background-color: #ffffff;
+    border-radius: 15px;
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+    padding: 30px 40px;
+    display: grid;
+    grid-template-columns: 1fr; /* Default 1 kolom untuk mobile */
+    gap: 30px 50px;
+    max-width: 800px;
+    margin: 0 auto; /* Pusatkan container skills */
+    width: 100%;
+}
+
+/* Media queries untuk layout dua kolom pada layar yang lebih besar */
+@media (min-width: 768px) {
+    .skills-container {
+        grid-template-columns: 1fr 1fr; /* 2 kolom di layar desktop */
+    }
+}
+
+.skill-box {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap; /* Memungkinkan wrap pada elemen jika tidak cukup ruang */
+}
+
+.skill-name {
+    font-weight: bold;
+    font-size: 1.1em;
+    color: #333;
+    flex-basis: 30%; /* Berikan ruang untuk nama skill */
+    text-align: left;
+    min-width: 90px; /* Pastikan nama skill punya cukup ruang */
+}
+
+.skill-bar-container {
+    flex-grow: 1; /* Biarkan container bar mengisi sisa ruang */
+    height: 10px;
+    background-color: #e0e0e0;
+    border-radius: 5px;
+    overflow: hidden; /* Penting untuk animasi bar */
+    margin: 0 15px; /* Jarak antara nama skill dan persentase */
+}
+
+.skill-bar {
+    height: 100%;
+    background-color: #53f1ff; /* Warna hijau untuk progress bar */
+    width: 0%; /* Dimulai dari 0% */
+    border-radius: 5px;
+    transition: width 1.5s ease-out; /* Animasi pengisian bar */
+}
+
+.skill-percentage {
+    font-weight: bold;
+    color: #2217ef;
+    min-width: 50px; /* Agar persentase tidak terlalu mepet */
+    text-align: right;
+}
+
+/* CSS untuk Galeri (dari jawaban sebelumnya, tambahkan ini juga ke style2.css) */
+.gallery-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 15px;
+    padding: 20px;
+    max-width: 1200px; /* Batasi lebar galeri */
+    margin: 0 auto; /* Pusatkan galeri */
+}
+
+.gallery-item {
+    width: 100%; /* Default 100% untuk layar kecil */
+    max-width: 300px; /* Lebar maksimum untuk gambar */
+    height: auto;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    cursor: pointer;
+    transition: transform 0.2s ease-in-out;
+}
+
+.gallery-item:hover {
+    transform: scale(1.03);
+}
+
+/* Media Queries untuk Responsif Galeri */
+@media (min-width: 600px) {
+    .gallery-item {
+        width: calc(50% - 20px); /* 2 gambar per baris di layar sedang */
+    }
+}
+
+@media (min-width: 900px) {
+    .gallery-item {
+        width: calc(33.33% - 20px); /* 3 gambar per baris di layar besar */
+    }
+}
+
+/* Gaya Modal (Pop-up) */
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 1000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0, 0, 0, 0.9);
+    justify-content: center;
+    align-items: center;
+}
+
+.modal-content {
+    margin: auto;
+    display: block;
+    width: 80%;
+    max-width: 700px;
+    animation-name: zoom;
+    animation-duration: 0.6s;
+}
+
+#caption {
+    margin: auto;
+    display: block;
+    width: 80%;
+    max-width: 700px;
+    text-align: center;
+    color: #ccc;
+    padding: 10px 0;
+    height: 150px;
+}
+
+/* Animasi Zoom pada Modal */
+@keyframes zoom {
+    from {transform: scale(0.1)}
+    to {transform: scale(1)}
+}
+
+/* Tombol Tutup */
+.close {
+    position: absolute;
+    top: 15px;
+    right: 35px;
+    color: #f1f1f1;
+    font-size: 40px;
+    font-weight: bold;
+    transition: 0.3s;
+    cursor: pointer;
+}
+
+.close:hover,
+.close:focus {
+    color: #bbb;
+    text-decoration: none;
+    cursor: pointer;
+}

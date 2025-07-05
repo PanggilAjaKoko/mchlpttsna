@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <title>Selamat Datang</title>
+  <link rel="icon" type="image/jpg" href="icon.jpg" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <a href="koko2.html" class="button">Next</a>
+
+  <video autoplay loop muted playsinline poster="" class="bg-video">
+    <source src="welcome.mp4" type="video/mp4">
+  </video>
+
+  <audio id="backgroundMusic" loop>
+    <source src="ralf.mp3" type="audio/mpeg">
+    Browser Anda tidak mendukung elemen audio.
+  </audio>
+
+  <script>
+    // Dapatkan elemen audio
+    const backgroundMusic = document.getElementById('backgroundMusic');
+
+    // Tambahkan event listener ke seluruh dokumen (body)
+    // yang akan mendengarkan setiap klik di mana saja
+    document.body.addEventListener('click', function() {
+      // Periksa apakah musik belum diputar
+      // `paused` akan true jika musik belum diputar atau sedang dijeda
+      if (backgroundMusic.paused) {
+        // Coba putar musik
+        const playPromise = backgroundMusic.play();
+
+        // Tangani kasus di mana pemutaran gagal (misalnya, diblokir oleh browser)
+        if (playPromise !== undefined) {
+          playPromise.then(() => {
+            console.log('Musik berhasil diputar setelah klik.');
+          }).catch(error => {
+            console.log('Gagal memutar musik setelah klik:', error);
+            // Anda bisa memberi tahu pengguna di sini jika pemutaran gagal
+          });
+        }
+      }
+    });
+
+    // Peringatan: Pastikan 'nama_file_audio_anda.mp3' adalah jalur yang benar ke file audio Anda.
+  </script>
+</body>
+</html>
